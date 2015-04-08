@@ -42,3 +42,28 @@ function unhackon {
     unset OLD_PS1
     unset OLD_PATH
 }
+
+
+function add2goenv {
+    DEVDIR=$1
+    IMPORT_PATH=$2
+
+    if [ "x${DEVDIR}" = "x" ]; then
+        echo "usage: add2virtualenv . github.com/paultag/rules"
+        return
+    fi
+
+    DEVDIR=$(readlink -f ${DEVDIR})
+
+    if [ "x${IMPORT_PATH}" = "x" ]; then
+        echo "usage: add2virtualenv . github.com/paultag/rules"
+        return
+    fi
+
+    if [ -e ${GOPATH}/src/${IMPORT_PATH} ]; then
+        echo "Already present as ${GOPATH}/src/${IMPORT_PATH}. Hunh. Remove it?"
+        return
+    fi
+
+    ln -s ${DEVDIR} ${GOPATH}/src/${IMPORT_PATH}
+}
