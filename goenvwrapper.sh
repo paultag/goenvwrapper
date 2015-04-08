@@ -25,7 +25,9 @@ function hackon {
         if [ -d ~/.goenvs/${env}/ ]; then
             export GOPATH=~/.goenvs/${env}/
             export OLD_PS1="${PS1}"
+            export OLD_PATH="${PATH}"
             export PS1="(${env})${PS1}"
+            export PATH="${PATH}:~/.goenvs/${env}/bin/"
         else
             echo "That goenv doesn't exist!"
         fi
@@ -36,5 +38,7 @@ function hackon {
 function unhackon {
     unset GOPATH
     export PS1=${OLD_PS1}
+    export PATH=${OLD_PATH}
     unset OLD_PS1
+    unset OLD_PATH
 }
