@@ -60,10 +60,13 @@ function add2goenv {
         return
     fi
 
-    if [ -e ${GOPATH}/src/${IMPORT_PATH} ]; then
-        echo "Already present as ${GOPATH}/src/${IMPORT_PATH}. Hunh. Remove it?"
+    ENVPATH=${GOPATH}/src/${IMPORT_PATH}
+
+    if [ -e ${ENVPATH} ]; then
+        echo "Already present as ${ENVPATH}. Hunh. Remove it?"
         return
     fi
 
-    ln -s ${DEVDIR} ${GOPATH}/src/${IMPORT_PATH}
+    mkdir -p $(dirname ${ENVPATH})
+    ln -s ${DEVDIR} ${ENVPATH}
 }
