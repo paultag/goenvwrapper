@@ -19,7 +19,7 @@ function mkgoenv {
 
 function hackon {
     env=$1
-    if [ "x${GOENVNAME}" = "x" ]; then
+    if [ "x${GOENVNAME}" != "x" ]; then
         echo "Already hacking on something!"
         return
     fi
