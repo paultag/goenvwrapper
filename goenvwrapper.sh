@@ -21,7 +21,7 @@ function hackon {
     env=$1
     if [ "x${GOENVNAME}" = "x" ]; then
         echo "Already hacking on something!"
-        exit 1
+        return
     fi
 
     if [ "x${env}" = "x" ]; then
