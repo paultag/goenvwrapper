@@ -19,10 +19,16 @@ function mkgoenv {
 
 function hackon {
     env=$1
+    if [ "x${GOENVNAME}" = "x" ]; then
+        echo "Already hacking on something!"
+        exit 1
+    fi
+
     if [ "x${env}" = "x" ]; then
         echo "Please give me a name!"
     else
         if [ -d ~/.goenvs/${env}/ ]; then
+            export GOENVNAME=${env}
             export GOPATH=~/.goenvs/${env}/
             export OLD_PS1="${PS1}"
             export OLD_PATH="${PATH}"
@@ -36,6 +42,7 @@ function hackon {
 
 
 function unhackon {
+    unset GOENVNAME
     unset GOPATH
     export PS1=${OLD_PS1}
     export PATH=${OLD_PATH}
