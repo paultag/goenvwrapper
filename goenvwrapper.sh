@@ -16,6 +16,25 @@ function mkgoenv {
     fi
 }
 
+function rmgoenv {
+    env=$1
+
+    if [ "x${GOENVNAME}" = "x${env}" ]; then
+        echo "Can't remove the active env"
+        return
+    fi
+
+    if [ "x${env}" = "x" ]; then
+        echo "Please give me a name!"
+    else
+        if [ -d ~/.goenvs/${env}/ ]; then
+            rm -rf ~/.goenvs/${env}/
+        else
+            echo "No such go env exists"
+        fi
+    fi
+}
+
 
 function hackon {
     env=$1
